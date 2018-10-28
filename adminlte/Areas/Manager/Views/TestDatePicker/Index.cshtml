@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WeaponDoc.Areas.Manager.Models.TestDatePicker>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Date }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Date }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Date })
+        </td>
+    </tr>
+}
+
+</table>

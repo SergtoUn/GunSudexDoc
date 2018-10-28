@@ -1,0 +1,1863 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GunSudexModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CalcDetails">
+          <Key>
+            <PropertyRef Name="CalcID" />
+          </Key>
+          <Property Name="CalcID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CalcDate" Type="date" Nullable="false" />
+          <Property Name="CalcNum" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Calculation">
+          <Key>
+            <PropertyRef Name="CurentDate" />
+          </Key>
+          <Property Name="CurentDate" Type="date" Nullable="false" />
+          <Property Name="HourFee" Type="money" Nullable="false" />
+          <Property Name="ConsumablesCost" Type="money" Nullable="false" />
+          <Property Name="EquipmentMaintanance" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CallDetails">
+          <Key>
+            <PropertyRef Name="CallID" />
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="CallID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemQty" Type="int" Nullable="false" />
+          <Property Name="ItemTestCost" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ProgramID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Calls">
+          <Key>
+            <PropertyRef Name="CallID" />
+          </Key>
+          <Property Name="CallID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CallDate" Type="date" Nullable="false" />
+          <Property Name="CustomerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocNumber" Type="varchar" MaxLength="12" />
+          <Property Name="AffidavitNum" Type="int" Nullable="false" />
+          <Property Name="AffidavitDate" Type="date" Nullable="false" />
+          <Property Name="ContractDate" Type="date" Nullable="false" />
+          <Property Name="CallStatus" Type="int" Nullable="false" />
+          <Property Name="DocType" Type="varchar" MaxLength="56" Nullable="false" />
+          <Property Name="Cost-Efficiency" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="SampleActDate" Type="date" Nullable="false" />
+          <Property Name="CallName" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CallStatuses">
+          <Key>
+            <PropertyRef Name="CallStatusID" />
+          </Key>
+          <Property Name="CallStatusID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CallStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CallStatusName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaxID" Type="varchar" MaxLength="50" />
+          <Property Name="BIC" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="OKPO" Type="int" />
+          <Property Name="Account" Type="varchar" MaxLength="28" />
+          <Property Name="BankBranch" Type="varchar" MaxLength="100" />
+          <Property Name="BranchAddress" Type="varchar" MaxLength="80" />
+          <Property Name="BankCode" Type="int" />
+          <Property Name="CustomerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RepresentativeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MPhoneNumber" Type="varchar" MaxLength="35" />
+          <Property Name="JudicialStatusID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="EquipmentStatuses">
+          <Key>
+            <PropertyRef Name="EquipmentStatusID" />
+          </Key>
+          <Property Name="EquipmentStatusID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EquipmentStatusDescr" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentType_TestMethods">
+          <Key>
+            <PropertyRef Name="EquipmentTypeID" />
+            <PropertyRef Name="MethodID" />
+          </Key>
+          <Property Name="EquipmentTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MethodID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentTypes">
+          <Key>
+            <PropertyRef Name="EquipmentTypeID" />
+          </Key>
+          <Property Name="EquipmentTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MethodID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EquipmentTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpertOrders">
+          <Key>
+            <PropertyRef Name="ExpertID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="ExpertID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Experts">
+          <Key>
+            <PropertyRef Name="ExpertID" />
+          </Key>
+          <Property Name="ExpertID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PositionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LabRoomID" Type="uniqueidentifier" />
+          <Property Name="FamilyName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MidName" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="40" />
+          <Property Name="MPhone" Type="varchar" MaxLength="15" />
+          <Property Name="Portrait" Type="image" />
+          <Property Name="IP" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Additional" Type="varchar(max)" />
+          <Property Name="ItemName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemProducer" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="ItemSubtypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="CalcDetailsID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemSubtypes">
+          <Key>
+            <PropertyRef Name="ItemSubtypeID" />
+          </Key>
+          <Property Name="ItemSubtypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemSubtype" Type="varchar" MaxLength="50" />
+          <Property Name="ItemTypeID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemTypes">
+          <Key>
+            <PropertyRef Name="ItemTypeID" />
+          </Key>
+          <Property Name="ItemTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemType" Type="text" Nullable="false" />
+          <Property Name="WeaponTypeID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JudicialStatuses">
+          <Key>
+            <PropertyRef Name="JudicialStatusID" />
+          </Key>
+          <Property Name="JudicialStatusID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="JudicialStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JudicialStatusName" Type="varchar" MaxLength="31" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabEquipments">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EquipmentTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EquipmentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EquipmentTypeCode" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="EquipmentFactoryID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EquipmentInventoryID" Type="varchar" MaxLength="50" />
+          <Property Name="EquipmentMark" Type="smallint" Nullable="false" />
+          <Property Name="EquipmentPlaceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateOfTest" Type="date" />
+          <Property Name="ExpiryDate" Type="bigint" />
+          <Property Name="DateOfDisposal" Type="date" />
+          <Property Name="DispProtocolNumber" Type="bigint" />
+          <Property Name="EquipmentStatusID" Type="uniqueidentifier" />
+          <Property Name="RespPersonID" Type="uniqueidentifier" />
+          <Property Name="PeriodOfValidity" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LabRooms">
+          <Key>
+            <PropertyRef Name="LabRoomID" />
+          </Key>
+          <Property Name="LabRoomID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LabRoomNumber" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="BuildingAddress" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="ItemID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExpertID" Type="uniqueidentifier" />
+          <Property Name="OrderNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FinalDate" Type="date" Nullable="false" />
+          <Property Name="CallID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parameters">
+          <Key>
+            <PropertyRef Name="ParameterID" />
+          </Key>
+          <Property Name="ParameterID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Paragraph" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ParameterDescr" Type="text" Nullable="false" />
+          <Property Name="ParameterName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProgramID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PositionDescr" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programs">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Standard" Type="varchar(max)" Nullable="false" />
+          <Property Name="ProgramNameFull" Type="varchar(max)" Nullable="false" />
+          <Property Name="ProgramNameShort" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DurationPerUnit" Type="float" />
+        </EntityType>
+        <EntityType Name="Representatives">
+          <Key>
+            <PropertyRef Name="RepresentativeID" />
+          </Key>
+          <Property Name="FamilyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MidName" Type="varchar" MaxLength="50" />
+          <Property Name="RepresentativeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="30" />
+          <Property Name="RepDoc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleDescr" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TestMethods">
+          <Key>
+            <PropertyRef Name="MethodID" />
+          </Key>
+          <Property Name="MethodID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MethodName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MethodDescr" Type="varchar(max)" />
+          <Property Name="Standard" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Paragraph" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ParameterID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EquipmentTypeID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WeaponTypes">
+          <Key>
+            <PropertyRef Name="WeaponTypeID" />
+          </Key>
+          <Property Name="WeaponTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeaponTypeDescr" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CallDetai__CallI__04459E07">
+          <End Role="Calls" Type="Self.Calls" Multiplicity="1" />
+          <End Role="CallDetails" Type="Self.CallDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calls">
+              <PropertyRef Name="CallID" />
+            </Principal>
+            <Dependent Role="CallDetails">
+              <PropertyRef Name="CallID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CallDetai__ItemI__0539C240">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="CallDetails" Type="Self.CallDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="CallDetails">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CallDetai__Progr__062DE679">
+          <End Role="Programs" Type="Self.Programs" Multiplicity="1" />
+          <End Role="CallDetails" Type="Self.CallDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="CallDetails">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Calls__CustomerI__607251E5">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Calls" Type="Self.Calls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Calls">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customers__Judic__7C1A6C5A">
+          <End Role="JudicialStatuses" Type="Self.JudicialStatuses" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JudicialStatuses">
+              <PropertyRef Name="JudicialStatusID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="JudicialStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customers__Repre__29221CFB">
+          <End Role="Representatives" Type="Self.Representatives" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Representatives">
+              <PropertyRef Name="RepresentativeID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="RepresentativeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__CalcDetai__45544755">
+          <End Role="CalcDetails" Type="Self.CalcDetails" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalcDetails">
+              <PropertyRef Name="CalcID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="CalcDetailsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemSubty__2022C2A6">
+          <End Role="ItemSubtypes" Type="Self.ItemSubtypes" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemSubtypes">
+              <PropertyRef Name="ItemSubtypeID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemSubtypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemSubty__ItemT__0E04126B">
+          <End Role="ItemTypes" Type="Self.ItemTypes" Multiplicity="1" />
+          <End Role="ItemSubtypes" Type="Self.ItemSubtypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ItemTypeID" />
+            </Principal>
+            <Dependent Role="ItemSubtypes">
+              <PropertyRef Name="ItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__07220AB2">
+          <End Role="CallDetails" Type="Self.CallDetails" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallDetails">
+              <PropertyRef Name="CallID" />
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CallID" />
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ExpertID__58671BC9">
+          <End Role="Experts" Type="Self.Experts" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Experts">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentStatus_LabEquipment">
+          <End Role="EquipmentStatuses" Type="Self.EquipmentStatuses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LabEquipments" Type="Self.LabEquipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentStatuses">
+              <PropertyRef Name="EquipmentStatusID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="EquipmentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentType_EquipmentTypeTestMethods">
+          <End Role="EquipmentTypes" Type="Self.EquipmentTypes" Multiplicity="1" />
+          <End Role="EquipmentType_TestMethods" Type="Self.EquipmentType_TestMethods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentTypes">
+              <PropertyRef Name="EquipmentTypeID" />
+            </Principal>
+            <Dependent Role="EquipmentType_TestMethods">
+              <PropertyRef Name="EquipmentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentType_LabEquipment">
+          <End Role="EquipmentTypes" Type="Self.EquipmentTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LabEquipments" Type="Self.LabEquipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentTypes">
+              <PropertyRef Name="EquipmentTypeID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="EquipmentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expert_ExpertOrders">
+          <End Role="Experts" Type="Self.Experts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExpertOrders" Type="Self.ExpertOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Experts">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="ExpertOrders">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experts_LabEquipments">
+          <End Role="Experts" Type="Self.Experts" Multiplicity="0..1" />
+          <End Role="LabEquipments" Type="Self.LabEquipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Experts">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="RespPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemType_Program">
+          <End Role="ItemTypes" Type="Self.ItemTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Programs" Type="Self.Programs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ItemTypeID" />
+            </Principal>
+            <Dependent Role="Programs">
+              <PropertyRef Name="ItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabRoom_Expert">
+          <End Role="LabRooms" Type="Self.LabRooms" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Experts" Type="Self.Experts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabRooms">
+              <PropertyRef Name="LabRoomID" />
+            </Principal>
+            <Dependent Role="Experts">
+              <PropertyRef Name="LabRoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabRoom_LabEquipment">
+          <End Role="LabRooms" Type="Self.LabRooms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LabEquipments" Type="Self.LabEquipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabRooms">
+              <PropertyRef Name="LabRoomID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="EquipmentPlaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ExpertOrders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExpertOrders" Type="Self.ExpertOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="ExpertOrders">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parameters_TestMethods">
+          <End Role="Parameters" Type="Self.Parameters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TestMethods" Type="Self.TestMethods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parameters">
+              <PropertyRef Name="ParameterID" />
+            </Principal>
+            <Dependent Role="TestMethods">
+              <PropertyRef Name="ParameterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position_Expert">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Experts" Type="Self.Experts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="Experts">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Program_Parameters">
+          <End Role="Programs" Type="Self.Programs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Parameters" Type="Self.Parameters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="Parameters">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Experts">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Experts" Type="Self.Experts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Experts">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestMethods_EquipmentTypeTestMethods">
+          <End Role="TestMethods" Type="Self.TestMethods" Multiplicity="1" />
+          <End Role="EquipmentType_TestMethods" Type="Self.EquipmentType_TestMethods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestMethods">
+              <PropertyRef Name="MethodID" />
+            </Principal>
+            <Dependent Role="EquipmentType_TestMethods">
+              <PropertyRef Name="MethodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeaponType_ItemType">
+          <End Role="WeaponTypes" Type="Self.WeaponTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemTypes" Type="Self.ItemTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeaponTypes">
+              <PropertyRef Name="WeaponTypeID" />
+            </Principal>
+            <Dependent Role="ItemTypes">
+              <PropertyRef Name="WeaponTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="GunSudexModelStoreContainer">
+          <EntitySet Name="CalcDetails" EntityType="Self.CalcDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calculation" EntityType="Self.Calculation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallDetails" EntityType="Self.CallDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calls" EntityType="Self.Calls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallStatuses" EntityType="Self.CallStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentStatuses" EntityType="Self.EquipmentStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentType_TestMethods" EntityType="Self.EquipmentType_TestMethods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentTypes" EntityType="Self.EquipmentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpertOrders" EntityType="Self.ExpertOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Experts" EntityType="Self.Experts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemSubtypes" EntityType="Self.ItemSubtypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemTypes" EntityType="Self.ItemTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JudicialStatuses" EntityType="Self.JudicialStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabEquipments" EntityType="Self.LabEquipments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabRooms" EntityType="Self.LabRooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parameters" EntityType="Self.Parameters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programs" EntityType="Self.Programs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Representatives" EntityType="Self.Representatives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestMethods" EntityType="Self.TestMethods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeaponTypes" EntityType="Self.WeaponTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CallDetai__CallI__04459E07" Association="Self.FK__CallDetai__CallI__04459E07">
+            <End Role="Calls" EntitySet="Calls" />
+            <End Role="CallDetails" EntitySet="CallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CallDetai__ItemI__0539C240" Association="Self.FK__CallDetai__ItemI__0539C240">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="CallDetails" EntitySet="CallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CallDetai__Progr__062DE679" Association="Self.FK__CallDetai__Progr__062DE679">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="CallDetails" EntitySet="CallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Calls__CustomerI__607251E5" Association="Self.FK__Calls__CustomerI__607251E5">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Calls" EntitySet="Calls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customers__Judic__7C1A6C5A" Association="Self.FK__Customers__Judic__7C1A6C5A">
+            <End Role="JudicialStatuses" EntitySet="JudicialStatuses" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customers__Repre__29221CFB" Association="Self.FK__Customers__Repre__29221CFB">
+            <End Role="Representatives" EntitySet="Representatives" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__CalcDetai__45544755" Association="Self.FK__Items__CalcDetai__45544755">
+            <End Role="CalcDetails" EntitySet="CalcDetails" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemSubty__2022C2A6" Association="Self.FK__Items__ItemSubty__2022C2A6">
+            <End Role="ItemSubtypes" EntitySet="ItemSubtypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemSubty__ItemT__0E04126B" Association="Self.FK__ItemSubty__ItemT__0E04126B">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="ItemSubtypes" EntitySet="ItemSubtypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__07220AB2" Association="Self.FK__Orders__07220AB2">
+            <End Role="CallDetails" EntitySet="CallDetails" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ExpertID__58671BC9" Association="Self.FK__Orders__ExpertID__58671BC9">
+            <End Role="Experts" EntitySet="Experts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentStatus_LabEquipment" Association="Self.FK_EquipmentStatus_LabEquipment">
+            <End Role="EquipmentStatuses" EntitySet="EquipmentStatuses" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentType_EquipmentTypeTestMethods" Association="Self.FK_EquipmentType_EquipmentTypeTestMethods">
+            <End Role="EquipmentTypes" EntitySet="EquipmentTypes" />
+            <End Role="EquipmentType_TestMethods" EntitySet="EquipmentType_TestMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentType_LabEquipment" Association="Self.FK_EquipmentType_LabEquipment">
+            <End Role="EquipmentTypes" EntitySet="EquipmentTypes" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expert_ExpertOrders" Association="Self.FK_Expert_ExpertOrders">
+            <End Role="Experts" EntitySet="Experts" />
+            <End Role="ExpertOrders" EntitySet="ExpertOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experts_LabEquipments" Association="Self.FK_Experts_LabEquipments">
+            <End Role="Experts" EntitySet="Experts" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemType_Program" Association="Self.FK_ItemType_Program">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="Programs" EntitySet="Programs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabRoom_Expert" Association="Self.FK_LabRoom_Expert">
+            <End Role="LabRooms" EntitySet="LabRooms" />
+            <End Role="Experts" EntitySet="Experts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabRoom_LabEquipment" Association="Self.FK_LabRoom_LabEquipment">
+            <End Role="LabRooms" EntitySet="LabRooms" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ExpertOrders" Association="Self.FK_Orders_ExpertOrders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="ExpertOrders" EntitySet="ExpertOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parameters_TestMethods" Association="Self.FK_Parameters_TestMethods">
+            <End Role="Parameters" EntitySet="Parameters" />
+            <End Role="TestMethods" EntitySet="TestMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position_Expert" Association="Self.FK_Position_Expert">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Experts" EntitySet="Experts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Program_Parameters" Association="Self.FK_Program_Parameters">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="Parameters" EntitySet="Parameters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Experts" Association="Self.FK_Roles_Experts">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Experts" EntitySet="Experts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestMethods_EquipmentTypeTestMethods" Association="Self.FK_TestMethods_EquipmentTypeTestMethods">
+            <End Role="TestMethods" EntitySet="TestMethods" />
+            <End Role="EquipmentType_TestMethods" EntitySet="EquipmentType_TestMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeaponType_ItemType" Association="Self.FK_WeaponType_ItemType">
+            <End Role="WeaponTypes" EntitySet="WeaponTypes" />
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GunSudexModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CalcDetail">
+          <Key>
+            <PropertyRef Name="CalcID" />
+          </Key>
+          <Property Name="CalcID" Type="Guid" Nullable="false" />
+          <Property Name="CalcDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CalcNum" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__CalcDetai__45544755" FromRole="CalcDetails" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Calculation">
+          <Key>
+            <PropertyRef Name="CurentDate" />
+          </Key>
+          <Property Name="CurentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HourFee" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ConsumablesCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="EquipmentMaintanance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CallDetail">
+          <Key>
+            <PropertyRef Name="CallID" />
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="CallID" Type="Guid" Nullable="false" />
+          <Property Name="ItemID" Type="Guid" Nullable="false" />
+          <Property Name="ItemQty" Type="Int32" Nullable="false" />
+          <Property Name="ItemTestCost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ProgramID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Call" Relationship="Self.FK__CallDetai__CallI__04459E07" FromRole="CallDetails" ToRole="Calls" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__CallDetai__ItemI__0539C240" FromRole="CallDetails" ToRole="Items" />
+          <NavigationProperty Name="Program" Relationship="Self.FK__CallDetai__Progr__062DE679" FromRole="CallDetails" ToRole="Programs" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__07220AB2" FromRole="CallDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Call">
+          <Key>
+            <PropertyRef Name="CallID" />
+          </Key>
+          <Property Name="CallID" Type="Guid" Nullable="false" />
+          <Property Name="CallDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerID" Type="Guid" Nullable="false" />
+          <Property Name="DocNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="AffidavitNum" Type="Int32" Nullable="false" />
+          <Property Name="AffidavitDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CallStatus" Type="Int32" Nullable="false" />
+          <Property Name="DocType" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cost_Efficiency" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="SampleActDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CallName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CallDetails" Relationship="Self.FK__CallDetai__CallI__04459E07" FromRole="Calls" ToRole="CallDetails" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Calls__CustomerI__607251E5" FromRole="Calls" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="CallStatus">
+          <Key>
+            <PropertyRef Name="CallStatusID" />
+          </Key>
+          <Property Name="CallStatusID" Type="Guid" Nullable="false" />
+          <Property Name="CallStatus1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CallStatusName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TaxID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OKPO" Type="Int32" />
+          <Property Name="Account" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="BankBranch" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BranchAddress" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="BankCode" Type="Int32" />
+          <Property Name="CustomerID" Type="Guid" Nullable="false" />
+          <Property Name="RepresentativeID" Type="Guid" Nullable="false" />
+          <Property Name="MPhoneNumber" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="JudicialStatusID" Type="Guid" />
+          <NavigationProperty Name="Calls" Relationship="Self.FK__Calls__CustomerI__607251E5" FromRole="Customers" ToRole="Calls" />
+          <NavigationProperty Name="JudicialStatus" Relationship="Self.FK__Customers__Judic__7C1A6C5A" FromRole="Customers" ToRole="JudicialStatuses" />
+          <NavigationProperty Name="Representative" Relationship="Self.FK__Customers__Repre__29221CFB" FromRole="Customers" ToRole="Representatives" />
+        </EntityType>
+        <EntityType Name="EquipmentStatus">
+          <Key>
+            <PropertyRef Name="EquipmentStatusID" />
+          </Key>
+          <Property Name="EquipmentStatusID" Type="Guid" Nullable="false" />
+          <Property Name="EquipmentStatusDescr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LabEquipments" Relationship="Self.FK_EquipmentStatus_LabEquipment" FromRole="EquipmentStatuses" ToRole="LabEquipments" />
+        </EntityType>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="EquipmentTypeID" />
+          </Key>
+          <Property Name="EquipmentTypeID" Type="Guid" Nullable="false" />
+          <Property Name="MethodID" Type="Guid" Nullable="false" />
+          <Property Name="EquipmentTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LabEquipments" Relationship="Self.FK_EquipmentType_LabEquipment" FromRole="EquipmentTypes" ToRole="LabEquipments" />
+          <NavigationProperty Name="TestMethods" Relationship="Self.EquipmentType_TestMethods" FromRole="EquipmentTypes" ToRole="TestMethods" />
+        </EntityType>
+        <EntityType Name="Expert">
+          <Key>
+            <PropertyRef Name="ExpertID" />
+          </Key>
+          <Property Name="ExpertID" Type="Guid" Nullable="false" />
+          <Property Name="PositionID" Type="Guid" Nullable="false" />
+          <Property Name="RoleID" Type="Guid" Nullable="false" />
+          <Property Name="LabRoomID" Type="Guid" />
+          <Property Name="FamilyName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MidName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="MPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Portrait" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ExpertID__58671BC9" FromRole="Experts" ToRole="Orders" />
+          <NavigationProperty Name="LabEquipments" Relationship="Self.FK_Experts_LabEquipments" FromRole="Experts" ToRole="LabEquipments" />
+          <NavigationProperty Name="LabRoom" Relationship="Self.FK_LabRoom_Expert" FromRole="Experts" ToRole="LabRooms" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Position_Expert" FromRole="Experts" ToRole="Positions" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Roles_Experts" FromRole="Experts" ToRole="Roles" />
+          <NavigationProperty Name="Orders1" Relationship="Self.ExpertOrders" FromRole="Experts" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Guid" Nullable="false" />
+          <Property Name="Additional" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemProducer" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemSubtypeID" Type="Guid" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CalcDetailsID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="CalcDetail" Relationship="Self.FK__Items__CalcDetai__45544755" FromRole="Items" ToRole="CalcDetails" />
+          <NavigationProperty Name="CallDetails" Relationship="Self.FK__CallDetai__ItemI__0539C240" FromRole="Items" ToRole="CallDetails" />
+          <NavigationProperty Name="ItemSubtype" Relationship="Self.FK__Items__ItemSubty__2022C2A6" FromRole="Items" ToRole="ItemSubtypes" />
+        </EntityType>
+        <EntityType Name="ItemSubtype">
+          <Key>
+            <PropertyRef Name="ItemSubtypeID" />
+          </Key>
+          <Property Name="ItemSubtypeID" Type="Guid" Nullable="false" />
+          <Property Name="ItemSubtype1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemTypeID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__ItemSubty__2022C2A6" FromRole="ItemSubtypes" ToRole="Items" />
+          <NavigationProperty Name="ItemType" Relationship="Self.FK__ItemSubty__ItemT__0E04126B" FromRole="ItemSubtypes" ToRole="ItemTypes" />
+        </EntityType>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="ItemTypeID" />
+          </Key>
+          <Property Name="ItemTypeID" Type="Guid" Nullable="false" />
+          <Property Name="ItemType1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WeaponTypeID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ItemSubtypes" Relationship="Self.FK__ItemSubty__ItemT__0E04126B" FromRole="ItemTypes" ToRole="ItemSubtypes" />
+          <NavigationProperty Name="Programs" Relationship="Self.FK_ItemType_Program" FromRole="ItemTypes" ToRole="Programs" />
+          <NavigationProperty Name="WeaponType" Relationship="Self.FK_WeaponType_ItemType" FromRole="ItemTypes" ToRole="WeaponTypes" />
+        </EntityType>
+        <EntityType Name="JudicialStatus">
+          <Key>
+            <PropertyRef Name="JudicialStatusID" />
+          </Key>
+          <Property Name="JudicialStatusID" Type="Guid" Nullable="false" />
+          <Property Name="JudicialStatus1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JudicialStatusName" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customers__Judic__7C1A6C5A" FromRole="JudicialStatuses" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="LabEquipment">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="Guid" Nullable="false" />
+          <Property Name="EquipmentTypeID" Type="Guid" Nullable="false" />
+          <Property Name="EquipmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EquipmentTypeCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EquipmentFactoryID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EquipmentInventoryID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EquipmentMark" Type="Int16" Nullable="false" />
+          <Property Name="EquipmentPlaceID" Type="Guid" Nullable="false" />
+          <Property Name="DateOfTest" Type="DateTime" Precision="0" />
+          <Property Name="ExpiryDate" Type="Int64" />
+          <Property Name="DateOfDisposal" Type="DateTime" Precision="0" />
+          <Property Name="DispProtocolNumber" Type="Int64" />
+          <Property Name="EquipmentStatusID" Type="Guid" />
+          <Property Name="RespPersonID" Type="Guid" />
+          <Property Name="PeriodOfValidity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EquipmentStatus" Relationship="Self.FK_EquipmentStatus_LabEquipment" FromRole="LabEquipments" ToRole="EquipmentStatuses" />
+          <NavigationProperty Name="EquipmentType" Relationship="Self.FK_EquipmentType_LabEquipment" FromRole="LabEquipments" ToRole="EquipmentTypes" />
+          <NavigationProperty Name="Expert" Relationship="Self.FK_Experts_LabEquipments" FromRole="LabEquipments" ToRole="Experts" />
+          <NavigationProperty Name="LabRoom" Relationship="Self.FK_LabRoom_LabEquipment" FromRole="LabEquipments" ToRole="LabRooms" />
+        </EntityType>
+        <EntityType Name="LabRoom">
+          <Key>
+            <PropertyRef Name="LabRoomID" />
+          </Key>
+          <Property Name="LabRoomID" Type="Guid" Nullable="false" />
+          <Property Name="LabRoomNumber" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BuildingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Experts" Relationship="Self.FK_LabRoom_Expert" FromRole="LabRooms" ToRole="Experts" />
+          <NavigationProperty Name="LabEquipments" Relationship="Self.FK_LabRoom_LabEquipment" FromRole="LabRooms" ToRole="LabEquipments" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Guid" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ItemID" Type="Guid" Nullable="false" />
+          <Property Name="ExpertID" Type="Guid" />
+          <Property Name="OrderNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FinalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CallID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="CallDetail" Relationship="Self.FK__Orders__07220AB2" FromRole="Orders" ToRole="CallDetails" />
+          <NavigationProperty Name="Expert" Relationship="Self.FK__Orders__ExpertID__58671BC9" FromRole="Orders" ToRole="Experts" />
+          <NavigationProperty Name="Experts" Relationship="Self.ExpertOrders" FromRole="Orders" ToRole="Experts" />
+        </EntityType>
+        <EntityType Name="Parameter">
+          <Key>
+            <PropertyRef Name="ParameterID" />
+          </Key>
+          <Property Name="ParameterID" Type="Guid" Nullable="false" />
+          <Property Name="Paragraph" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParameterDescr" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParameterName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProgramID" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TestMethods" Relationship="Self.FK_Parameters_TestMethods" FromRole="Parameters" ToRole="TestMethods" />
+          <NavigationProperty Name="Program" Relationship="Self.FK_Program_Parameters" FromRole="Parameters" ToRole="Programs" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="Guid" Nullable="false" />
+          <Property Name="PositionDescr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Experts" Relationship="Self.FK_Position_Expert" FromRole="Positions" ToRole="Experts" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="Guid" Nullable="false" />
+          <Property Name="ItemTypeID" Type="Guid" Nullable="false" />
+          <Property Name="Standard" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProgramNameFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProgramNameShort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DurationPerUnit" Type="Double" />
+          <NavigationProperty Name="CallDetails" Relationship="Self.FK__CallDetai__Progr__062DE679" FromRole="Programs" ToRole="CallDetails" />
+          <NavigationProperty Name="ItemType" Relationship="Self.FK_ItemType_Program" FromRole="Programs" ToRole="ItemTypes" />
+          <NavigationProperty Name="Parameters" Relationship="Self.FK_Program_Parameters" FromRole="Programs" ToRole="Parameters" />
+        </EntityType>
+        <EntityType Name="Representative">
+          <Key>
+            <PropertyRef Name="RepresentativeID" />
+          </Key>
+          <Property Name="FamilyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MidName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RepresentativeID" Type="Guid" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RepDoc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customers__Repre__29221CFB" FromRole="Representatives" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleDescr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Experts" Relationship="Self.FK_Roles_Experts" FromRole="Roles" ToRole="Experts" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TestMethod">
+          <Key>
+            <PropertyRef Name="MethodID" />
+          </Key>
+          <Property Name="MethodID" Type="Guid" Nullable="false" />
+          <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MethodDescr" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Standard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Paragraph" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParameterID" Type="Guid" Nullable="false" />
+          <Property Name="EquipmentTypeID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Parameter" Relationship="Self.FK_Parameters_TestMethods" FromRole="TestMethods" ToRole="Parameters" />
+          <NavigationProperty Name="EquipmentTypes" Relationship="Self.EquipmentType_TestMethods" FromRole="TestMethods" ToRole="EquipmentTypes" />
+        </EntityType>
+        <EntityType Name="WeaponType">
+          <Key>
+            <PropertyRef Name="WeaponTypeID" />
+          </Key>
+          <Property Name="WeaponTypeID" Type="Guid" Nullable="false" />
+          <Property Name="WeaponTypeDescr" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ItemTypes" Relationship="Self.FK_WeaponType_ItemType" FromRole="WeaponTypes" ToRole="ItemTypes" />
+        </EntityType>
+        <Association Name="FK__Items__CalcDetai__45544755">
+          <End Role="CalcDetails" Type="Self.CalcDetail" Multiplicity="1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalcDetails">
+              <PropertyRef Name="CalcID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="CalcDetailsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CallDetai__CallI__04459E07">
+          <End Role="Calls" Type="Self.Call" Multiplicity="1" />
+          <End Role="CallDetails" Type="Self.CallDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calls">
+              <PropertyRef Name="CallID" />
+            </Principal>
+            <Dependent Role="CallDetails">
+              <PropertyRef Name="CallID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CallDetai__ItemI__0539C240">
+          <End Role="Items" Type="Self.Item" Multiplicity="1" />
+          <End Role="CallDetails" Type="Self.CallDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="CallDetails">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CallDetai__Progr__062DE679">
+          <End Role="Programs" Type="Self.Program" Multiplicity="1" />
+          <End Role="CallDetails" Type="Self.CallDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="CallDetails">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__07220AB2">
+          <End Role="CallDetails" Type="Self.CallDetail" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallDetails">
+              <PropertyRef Name="CallID" />
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CallID" />
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Calls__CustomerI__607251E5">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Calls" Type="Self.Call" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Calls">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customers__Judic__7C1A6C5A">
+          <End Role="JudicialStatuses" Type="Self.JudicialStatus" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JudicialStatuses">
+              <PropertyRef Name="JudicialStatusID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="JudicialStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customers__Repre__29221CFB">
+          <End Role="Representatives" Type="Self.Representative" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Representatives">
+              <PropertyRef Name="RepresentativeID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="RepresentativeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentStatus_LabEquipment">
+          <End Role="EquipmentStatuses" Type="Self.EquipmentStatus" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LabEquipments" Type="Self.LabEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentStatuses">
+              <PropertyRef Name="EquipmentStatusID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="EquipmentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentType_LabEquipment">
+          <End Role="EquipmentTypes" Type="Self.EquipmentType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LabEquipments" Type="Self.LabEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentTypes">
+              <PropertyRef Name="EquipmentTypeID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="EquipmentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ExpertID__58671BC9">
+          <End Role="Experts" Type="Self.Expert" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Experts">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ExpertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experts_LabEquipments">
+          <End Role="Experts" Type="Self.Expert" Multiplicity="0..1" />
+          <End Role="LabEquipments" Type="Self.LabEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Experts">
+              <PropertyRef Name="ExpertID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="RespPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabRoom_Expert">
+          <End Role="LabRooms" Type="Self.LabRoom" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Experts" Type="Self.Expert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabRooms">
+              <PropertyRef Name="LabRoomID" />
+            </Principal>
+            <Dependent Role="Experts">
+              <PropertyRef Name="LabRoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position_Expert">
+          <End Role="Positions" Type="Self.Position" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Experts" Type="Self.Expert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="Experts">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Experts">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Experts" Type="Self.Expert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Experts">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemSubty__2022C2A6">
+          <End Role="ItemSubtypes" Type="Self.ItemSubtype" Multiplicity="1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemSubtypes">
+              <PropertyRef Name="ItemSubtypeID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemSubtypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemSubty__ItemT__0E04126B">
+          <End Role="ItemTypes" Type="Self.ItemType" Multiplicity="1" />
+          <End Role="ItemSubtypes" Type="Self.ItemSubtype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ItemTypeID" />
+            </Principal>
+            <Dependent Role="ItemSubtypes">
+              <PropertyRef Name="ItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemType_Program">
+          <End Role="ItemTypes" Type="Self.ItemType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Programs" Type="Self.Program" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ItemTypeID" />
+            </Principal>
+            <Dependent Role="Programs">
+              <PropertyRef Name="ItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeaponType_ItemType">
+          <End Role="WeaponTypes" Type="Self.WeaponType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemTypes" Type="Self.ItemType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeaponTypes">
+              <PropertyRef Name="WeaponTypeID" />
+            </Principal>
+            <Dependent Role="ItemTypes">
+              <PropertyRef Name="WeaponTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabRoom_LabEquipment">
+          <End Role="LabRooms" Type="Self.LabRoom" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LabEquipments" Type="Self.LabEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabRooms">
+              <PropertyRef Name="LabRoomID" />
+            </Principal>
+            <Dependent Role="LabEquipments">
+              <PropertyRef Name="EquipmentPlaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parameters_TestMethods">
+          <End Role="Parameters" Type="Self.Parameter" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TestMethods" Type="Self.TestMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parameters">
+              <PropertyRef Name="ParameterID" />
+            </Principal>
+            <Dependent Role="TestMethods">
+              <PropertyRef Name="ParameterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Program_Parameters">
+          <End Role="Programs" Type="Self.Program" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Parameters" Type="Self.Parameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="Parameters">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipmentType_TestMethods">
+          <End Role="EquipmentTypes" Type="Self.EquipmentType" Multiplicity="*" />
+          <End Role="TestMethods" Type="Self.TestMethod" Multiplicity="*" />
+        </Association>
+        <Association Name="ExpertOrders">
+          <End Role="Experts" Type="Self.Expert" Multiplicity="*" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="GunSudexDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CalcDetails" EntityType="Self.CalcDetail" />
+          <EntitySet Name="Calculations" EntityType="Self.Calculation" />
+          <EntitySet Name="CallDetails" EntityType="Self.CallDetail" />
+          <EntitySet Name="Calls" EntityType="Self.Call" />
+          <EntitySet Name="CallStatuses" EntityType="Self.CallStatus" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="EquipmentStatuses" EntityType="Self.EquipmentStatus" />
+          <EntitySet Name="EquipmentTypes" EntityType="Self.EquipmentType" />
+          <EntitySet Name="Experts" EntityType="Self.Expert" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="ItemSubtypes" EntityType="Self.ItemSubtype" />
+          <EntitySet Name="ItemTypes" EntityType="Self.ItemType" />
+          <EntitySet Name="JudicialStatuses" EntityType="Self.JudicialStatus" />
+          <EntitySet Name="LabEquipments" EntityType="Self.LabEquipment" />
+          <EntitySet Name="LabRooms" EntityType="Self.LabRoom" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Parameters" EntityType="Self.Parameter" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Programs" EntityType="Self.Program" />
+          <EntitySet Name="Representatives" EntityType="Self.Representative" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TestMethods" EntityType="Self.TestMethod" />
+          <EntitySet Name="WeaponTypes" EntityType="Self.WeaponType" />
+          <AssociationSet Name="FK__Items__CalcDetai__45544755" Association="Self.FK__Items__CalcDetai__45544755">
+            <End Role="CalcDetails" EntitySet="CalcDetails" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CallDetai__CallI__04459E07" Association="Self.FK__CallDetai__CallI__04459E07">
+            <End Role="Calls" EntitySet="Calls" />
+            <End Role="CallDetails" EntitySet="CallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CallDetai__ItemI__0539C240" Association="Self.FK__CallDetai__ItemI__0539C240">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="CallDetails" EntitySet="CallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CallDetai__Progr__062DE679" Association="Self.FK__CallDetai__Progr__062DE679">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="CallDetails" EntitySet="CallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__07220AB2" Association="Self.FK__Orders__07220AB2">
+            <End Role="CallDetails" EntitySet="CallDetails" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Calls__CustomerI__607251E5" Association="Self.FK__Calls__CustomerI__607251E5">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Calls" EntitySet="Calls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customers__Judic__7C1A6C5A" Association="Self.FK__Customers__Judic__7C1A6C5A">
+            <End Role="JudicialStatuses" EntitySet="JudicialStatuses" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customers__Repre__29221CFB" Association="Self.FK__Customers__Repre__29221CFB">
+            <End Role="Representatives" EntitySet="Representatives" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentStatus_LabEquipment" Association="Self.FK_EquipmentStatus_LabEquipment">
+            <End Role="EquipmentStatuses" EntitySet="EquipmentStatuses" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentType_LabEquipment" Association="Self.FK_EquipmentType_LabEquipment">
+            <End Role="EquipmentTypes" EntitySet="EquipmentTypes" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ExpertID__58671BC9" Association="Self.FK__Orders__ExpertID__58671BC9">
+            <End Role="Experts" EntitySet="Experts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experts_LabEquipments" Association="Self.FK_Experts_LabEquipments">
+            <End Role="Experts" EntitySet="Experts" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabRoom_Expert" Association="Self.FK_LabRoom_Expert">
+            <End Role="LabRooms" EntitySet="LabRooms" />
+            <End Role="Experts" EntitySet="Experts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position_Expert" Association="Self.FK_Position_Expert">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Experts" EntitySet="Experts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Experts" Association="Self.FK_Roles_Experts">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Experts" EntitySet="Experts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemSubty__2022C2A6" Association="Self.FK__Items__ItemSubty__2022C2A6">
+            <End Role="ItemSubtypes" EntitySet="ItemSubtypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemSubty__ItemT__0E04126B" Association="Self.FK__ItemSubty__ItemT__0E04126B">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="ItemSubtypes" EntitySet="ItemSubtypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemType_Program" Association="Self.FK_ItemType_Program">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="Programs" EntitySet="Programs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeaponType_ItemType" Association="Self.FK_WeaponType_ItemType">
+            <End Role="WeaponTypes" EntitySet="WeaponTypes" />
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabRoom_LabEquipment" Association="Self.FK_LabRoom_LabEquipment">
+            <End Role="LabRooms" EntitySet="LabRooms" />
+            <End Role="LabEquipments" EntitySet="LabEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parameters_TestMethods" Association="Self.FK_Parameters_TestMethods">
+            <End Role="Parameters" EntitySet="Parameters" />
+            <End Role="TestMethods" EntitySet="TestMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Program_Parameters" Association="Self.FK_Program_Parameters">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="Parameters" EntitySet="Parameters" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentType_TestMethods" Association="Self.EquipmentType_TestMethods">
+            <End Role="EquipmentTypes" EntitySet="EquipmentTypes" />
+            <End Role="TestMethods" EntitySet="TestMethods" />
+          </AssociationSet>
+          <AssociationSet Name="ExpertOrders" Association="Self.ExpertOrders">
+            <End Role="Experts" EntitySet="Experts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GunSudexModelStoreContainer" CdmEntityContainer="GunSudexDbContext">
+          <EntitySetMapping Name="CalcDetails">
+            <EntityTypeMapping TypeName="GunSudexModel.CalcDetail">
+              <MappingFragment StoreEntitySet="CalcDetails">
+                <ScalarProperty Name="CalcID" ColumnName="CalcID" />
+                <ScalarProperty Name="CalcDate" ColumnName="CalcDate" />
+                <ScalarProperty Name="CalcNum" ColumnName="CalcNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calculations">
+            <EntityTypeMapping TypeName="GunSudexModel.Calculation">
+              <MappingFragment StoreEntitySet="Calculation">
+                <ScalarProperty Name="CurentDate" ColumnName="CurentDate" />
+                <ScalarProperty Name="HourFee" ColumnName="HourFee" />
+                <ScalarProperty Name="ConsumablesCost" ColumnName="ConsumablesCost" />
+                <ScalarProperty Name="EquipmentMaintanance" ColumnName="EquipmentMaintanance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallDetails">
+            <EntityTypeMapping TypeName="GunSudexModel.CallDetail">
+              <MappingFragment StoreEntitySet="CallDetails">
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ItemQty" ColumnName="ItemQty" />
+                <ScalarProperty Name="ItemTestCost" ColumnName="ItemTestCost" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calls">
+            <EntityTypeMapping TypeName="GunSudexModel.Call">
+              <MappingFragment StoreEntitySet="Calls">
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="CallDate" ColumnName="CallDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="DocNumber" ColumnName="DocNumber" />
+                <ScalarProperty Name="AffidavitNum" ColumnName="AffidavitNum" />
+                <ScalarProperty Name="AffidavitDate" ColumnName="AffidavitDate" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="CallStatus" ColumnName="CallStatus" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="Cost_Efficiency" ColumnName="Cost-Efficiency" />
+                <ScalarProperty Name="SampleActDate" ColumnName="SampleActDate" />
+                <ScalarProperty Name="CallName" ColumnName="CallName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallStatuses">
+            <EntityTypeMapping TypeName="GunSudexModel.CallStatus">
+              <MappingFragment StoreEntitySet="CallStatuses">
+                <ScalarProperty Name="CallStatusID" ColumnName="CallStatusID" />
+                <ScalarProperty Name="CallStatus1" ColumnName="CallStatus" />
+                <ScalarProperty Name="CallStatusName" ColumnName="CallStatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="GunSudexModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="TaxID" ColumnName="TaxID" />
+                <ScalarProperty Name="BIC" ColumnName="BIC" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="OKPO" ColumnName="OKPO" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="RepresentativeID" ColumnName="RepresentativeID" />
+                <ScalarProperty Name="MPhoneNumber" ColumnName="MPhoneNumber" />
+                <ScalarProperty Name="JudicialStatusID" ColumnName="JudicialStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentStatuses">
+            <EntityTypeMapping TypeName="GunSudexModel.EquipmentStatus">
+              <MappingFragment StoreEntitySet="EquipmentStatuses">
+                <ScalarProperty Name="EquipmentStatusID" ColumnName="EquipmentStatusID" />
+                <ScalarProperty Name="EquipmentStatusDescr" ColumnName="EquipmentStatusDescr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentTypes">
+            <EntityTypeMapping TypeName="GunSudexModel.EquipmentType">
+              <MappingFragment StoreEntitySet="EquipmentTypes">
+                <ScalarProperty Name="EquipmentTypeID" ColumnName="EquipmentTypeID" />
+                <ScalarProperty Name="MethodID" ColumnName="MethodID" />
+                <ScalarProperty Name="EquipmentTypeName" ColumnName="EquipmentTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Experts">
+            <EntityTypeMapping TypeName="GunSudexModel.Expert">
+              <MappingFragment StoreEntitySet="Experts">
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="LabRoomID" ColumnName="LabRoomID" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MidName" ColumnName="MidName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MPhone" ColumnName="MPhone" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="GunSudexModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Additional" ColumnName="Additional" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemProducer" ColumnName="ItemProducer" />
+                <ScalarProperty Name="ItemSubtypeID" ColumnName="ItemSubtypeID" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CalcDetailsID" ColumnName="CalcDetailsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemSubtypes">
+            <EntityTypeMapping TypeName="GunSudexModel.ItemSubtype">
+              <MappingFragment StoreEntitySet="ItemSubtypes">
+                <ScalarProperty Name="ItemSubtypeID" ColumnName="ItemSubtypeID" />
+                <ScalarProperty Name="ItemSubtype1" ColumnName="ItemSubtype" />
+                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemTypes">
+            <EntityTypeMapping TypeName="GunSudexModel.ItemType">
+              <MappingFragment StoreEntitySet="ItemTypes">
+                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+                <ScalarProperty Name="ItemType1" ColumnName="ItemType" />
+                <ScalarProperty Name="WeaponTypeID" ColumnName="WeaponTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JudicialStatuses">
+            <EntityTypeMapping TypeName="GunSudexModel.JudicialStatus">
+              <MappingFragment StoreEntitySet="JudicialStatuses">
+                <ScalarProperty Name="JudicialStatusID" ColumnName="JudicialStatusID" />
+                <ScalarProperty Name="JudicialStatus1" ColumnName="JudicialStatus" />
+                <ScalarProperty Name="JudicialStatusName" ColumnName="JudicialStatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabEquipments">
+            <EntityTypeMapping TypeName="GunSudexModel.LabEquipment">
+              <MappingFragment StoreEntitySet="LabEquipments">
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="EquipmentTypeID" ColumnName="EquipmentTypeID" />
+                <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
+                <ScalarProperty Name="EquipmentTypeCode" ColumnName="EquipmentTypeCode" />
+                <ScalarProperty Name="EquipmentFactoryID" ColumnName="EquipmentFactoryID" />
+                <ScalarProperty Name="EquipmentInventoryID" ColumnName="EquipmentInventoryID" />
+                <ScalarProperty Name="EquipmentMark" ColumnName="EquipmentMark" />
+                <ScalarProperty Name="EquipmentPlaceID" ColumnName="EquipmentPlaceID" />
+                <ScalarProperty Name="DateOfTest" ColumnName="DateOfTest" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="DateOfDisposal" ColumnName="DateOfDisposal" />
+                <ScalarProperty Name="DispProtocolNumber" ColumnName="DispProtocolNumber" />
+                <ScalarProperty Name="EquipmentStatusID" ColumnName="EquipmentStatusID" />
+                <ScalarProperty Name="RespPersonID" ColumnName="RespPersonID" />
+                <ScalarProperty Name="PeriodOfValidity" ColumnName="PeriodOfValidity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabRooms">
+            <EntityTypeMapping TypeName="GunSudexModel.LabRoom">
+              <MappingFragment StoreEntitySet="LabRooms">
+                <ScalarProperty Name="LabRoomID" ColumnName="LabRoomID" />
+                <ScalarProperty Name="LabRoomNumber" ColumnName="LabRoomNumber" />
+                <ScalarProperty Name="BuildingAddress" ColumnName="BuildingAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="GunSudexModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="FinalDate" ColumnName="FinalDate" />
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parameters">
+            <EntityTypeMapping TypeName="GunSudexModel.Parameter">
+              <MappingFragment StoreEntitySet="Parameters">
+                <ScalarProperty Name="ParameterID" ColumnName="ParameterID" />
+                <ScalarProperty Name="Paragraph" ColumnName="Paragraph" />
+                <ScalarProperty Name="ParameterDescr" ColumnName="ParameterDescr" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="GunSudexModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="PositionDescr" ColumnName="PositionDescr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="GunSudexModel.Program">
+              <MappingFragment StoreEntitySet="Programs">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="ProgramNameFull" ColumnName="ProgramNameFull" />
+                <ScalarProperty Name="ProgramNameShort" ColumnName="ProgramNameShort" />
+                <ScalarProperty Name="DurationPerUnit" ColumnName="DurationPerUnit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Representatives">
+            <EntityTypeMapping TypeName="GunSudexModel.Representative">
+              <MappingFragment StoreEntitySet="Representatives">
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MidName" ColumnName="MidName" />
+                <ScalarProperty Name="RepresentativeID" ColumnName="RepresentativeID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="RepDoc" ColumnName="RepDoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GunSudexModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleDescr" ColumnName="RoleDescr" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GunSudexModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestMethods">
+            <EntityTypeMapping TypeName="GunSudexModel.TestMethod">
+              <MappingFragment StoreEntitySet="TestMethods">
+                <ScalarProperty Name="MethodID" ColumnName="MethodID" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+                <ScalarProperty Name="MethodDescr" ColumnName="MethodDescr" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="Paragraph" ColumnName="Paragraph" />
+                <ScalarProperty Name="ParameterID" ColumnName="ParameterID" />
+                <ScalarProperty Name="EquipmentTypeID" ColumnName="EquipmentTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeaponTypes">
+            <EntityTypeMapping TypeName="GunSudexModel.WeaponType">
+              <MappingFragment StoreEntitySet="WeaponTypes">
+                <ScalarProperty Name="WeaponTypeID" ColumnName="WeaponTypeID" />
+                <ScalarProperty Name="WeaponTypeDescr" ColumnName="WeaponTypeDescr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EquipmentType_TestMethods" TypeName="GunSudexModel.EquipmentType_TestMethods" StoreEntitySet="EquipmentType_TestMethods">
+            <EndProperty Name="EquipmentTypes">
+              <ScalarProperty Name="EquipmentTypeID" ColumnName="EquipmentTypeID" />
+            </EndProperty>
+            <EndProperty Name="TestMethods">
+              <ScalarProperty Name="MethodID" ColumnName="MethodID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ExpertOrders" TypeName="GunSudexModel.ExpertOrders" StoreEntitySet="ExpertOrders">
+            <EndProperty Name="Experts">
+              <ScalarProperty Name="ExpertID" ColumnName="ExpertID" />
+            </EndProperty>
+            <EndProperty Name="Orders">
+              <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GunSudexModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GunSudexModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GunSudexModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GunSudexModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GunSudexModel.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GunSudexModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GunSudexModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

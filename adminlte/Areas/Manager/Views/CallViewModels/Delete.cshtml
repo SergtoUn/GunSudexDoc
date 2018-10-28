@@ -1,0 +1,305 @@
+﻿@model WeaponDoc.Areas.Manager.Models.CallViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CallViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CallDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CallDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepFamilyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepFamilyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepMidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepMidName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JudicialStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JudicialStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OKPO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OKPO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerBankAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerBankAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankBranch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankBranch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BranchAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FamilyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FamilyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MidName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AffidavitNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AffidavitNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AffidavitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AffidavitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemProducer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemProducer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Additional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Additional)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramNameFull)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramNameFull)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramNameShort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramNameShort)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,43 @@
+﻿@model WeaponDoc.Models.Calculation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Calculation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HourFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HourFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConsumablesCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConsumablesCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentMaintanance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentMaintanance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CurentDate }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,61 @@
+﻿@model WeaponDoc.Models.Program
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="content-wrapper">
+    
+    <h2>Информация о программе</h2>
+
+    <div>
+        <h4>Программа</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Standard)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Standard)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProgramNameFull)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProgramNameFull)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProgramNameShort)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProgramNameShort)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ItemType.ItemType1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ItemType.ItemType1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DurationPerUnit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DurationPerUnit)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProgramID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </div>

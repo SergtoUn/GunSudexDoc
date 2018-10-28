@@ -1,0 +1,99 @@
+﻿@model WeaponDoc.Models.Expert
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Expert</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FamilyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FamilyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MidName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Portrait)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Portrait)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabRoom.LabRoomNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabRoom.LabRoomNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position.PositionDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position.PositionDescr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.RoleDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.RoleDescr)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExpertID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

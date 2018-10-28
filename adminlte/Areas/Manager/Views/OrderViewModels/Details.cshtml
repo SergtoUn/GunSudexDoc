@@ -1,0 +1,67 @@
+﻿@model WeaponDoc.Areas.Manager.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CallID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CallID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CallQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CallQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpertFamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpertFamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FinalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinalDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

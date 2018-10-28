@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WeaponDoc.Models.Calculation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HourFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConsumablesCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EquipmentMaintanance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HourFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConsumablesCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EquipmentMaintanance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CurentDate }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CurentDate }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CurentDate })
+        </td>
+    </tr>
+}
+
+</table>

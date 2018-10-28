@@ -1,0 +1,26 @@
+﻿@model WeaponDoc.Models.WeaponType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WeaponType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WeaponTypeDescr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeaponTypeDescr)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WeaponTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

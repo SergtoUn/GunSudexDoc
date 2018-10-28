@@ -1,0 +1,56 @@
+﻿@model WeaponDoc.Models.Program
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Program</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Standard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Standard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramNameFull)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramNameFull)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramNameShort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramNameShort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemType.ItemType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemType.ItemType1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

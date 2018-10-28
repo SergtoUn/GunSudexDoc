@@ -1,0 +1,93 @@
+﻿@model WeaponDoc.Models.Calculation
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="content-wrapper">
+
+
+    <section class="content-header">
+
+        <h1>
+            Ввести данные для калькуляций
+            <small></small>
+        </h1>
+    </section>
+
+    <section class="content">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="box">
+                <div class="box-header">
+                    <h4>Данные о программе</h4>
+                </div>
+                <div class="box-body">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CurentDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.CurentDate, DateTime.Today.ToString("{0:dd MMMM yyyy г.}"), new { @class = "col-md-4 datepicker", @style = "max-width:170px", @oninput = "this.className = ''", @placeholder = "Дата...", @id = "Datepicker", @title = "Дата начала действия" })
+                            @Html.ValidationMessageFor(model => model.CurentDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HourFee, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.HourFee, new { htmlAttributes = new { @class = "form-control col-md-4", @style = "max-width:170px" } })
+                            @Html.ValidationMessageFor(model => model.HourFee, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConsumablesCost, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ConsumablesCost, new { htmlAttributes = new { @class = "form-control col-md-4", @style = "max-width:170px" } })
+                            @Html.ValidationMessageFor(model => model.ConsumablesCost, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EquipmentMaintanance, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.EquipmentMaintanance, new { htmlAttributes = new { @class = "form-control col-md-4", @style = "max-width:170px" } })
+                            @Html.ValidationMessageFor(model => model.EquipmentMaintanance, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-10">
+                            <input type="submit" value="Ввод данных" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </section>
+
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryval")
+        <link href="~/Content/DataTables/datatables.min.css" rel="stylesheet" />
+        <script src="~/Content/DataTables/datatables.min.js"></script>
+        <script src="~/Content/DataTables/datatables.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/dataTables.buttons.min.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.flash.min.js"></script>
+        <script src="~/Content/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+        <script src="~/Content/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.html5.min.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.print.min.js"></script>
+        <script src="~/Scripts/RegexFilter.js"></script>
+        <script src="~/Scripts/AdvancedForms.js"></script>
+    }
+</div>

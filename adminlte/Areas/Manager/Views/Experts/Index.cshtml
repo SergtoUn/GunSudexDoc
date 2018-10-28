@@ -1,0 +1,145 @@
+﻿@model IEnumerable<WeaponDoc.Models.Expert>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="content-wrapper">
+    <h2>Эксперты</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table id="exptable" class="display">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Фамилия")
+            </th>
+            <th>
+                @Html.DisplayName("Имя")
+            </th>
+            <th>
+                @Html.DisplayName("Отчество")
+            </th>
+            <th>
+                @Html.DisplayName("E-mail")
+            </th>
+            <th>
+                @Html.DisplayName("Телефон")
+            </th>
+            <th>
+                @Html.DisplayName("Фото")
+            </th>
+            <th>
+                @Html.DisplayName("IP")
+            </th>
+            <th>
+                @Html.DisplayName("Номер комнаты")
+            </th>
+            <th>
+                @Html.DisplayName("Должность")
+            </th>
+            <th>
+                @Html.DisplayName("Роль")
+            </th>
+            <th></th>
+        </tr>
+            </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MidName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Portrait)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LabRoom.LabRoomNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position.PositionDescr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.RoleDescr)
+                </td>
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.ExpertID }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.ExpertID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+
+    <link href="~/Content/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/Content/DataTables/datatables.min.js"></script>
+    <script src="~/Content/DataTables/datatables.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.flash.min.js"></script>
+    <script src="~/Content/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+    <script src="~/Content/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.html5.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.print.min.js"></script>
+
+
+    <script>
+            $(document).ready(function () {
+
+                $("#exptable").DataTable(
+                    {
+                        dom: 'Bfrtip',
+                        buttons: [
+                            { extend: 'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+                        ],
+
+                        "language":
+                            {
+                                "processing": "Подождите...",
+                                "search": "Поиск:",
+                                "lengthMenu": "Показать _MENU_ записей",
+                                "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                                "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                                "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                                "infoPostFix": "",
+                                "loadingRecords": "Загрузка записей...",
+                                "zeroRecords": "Записи отсутствуют.",
+                                "emptyTable": "В таблице отсутствуют данные",
+                                "paginate": {
+                                    "first": "Первая",
+                                    "previous": "Предыдущая",
+                                    "next": "Следующая",
+                                    "last": "Последняя"
+                                },
+                                "aria": {
+                                    "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                                    "sortDescending": ": активировать для сортировки столбца по убыванию"
+                                }
+                            }
+
+                    }
+                )
+            })
+
+    </script>
+}

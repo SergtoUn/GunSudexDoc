@@ -1,0 +1,220 @@
+﻿@model IEnumerable<WeaponDoc.Areas.Manager.Models.CallViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="content-wrapper">
+
+
+    <section class="content-header">
+
+        <h1>
+            Заявки
+            <small></small>
+        </h1>
+    </section>
+    <section class="content">
+        @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+        <table id="example" display nowrap" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Дата заявки")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Номер заявки")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Дата договора")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Тип документа")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Заказчик")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Представитель заказчика")
+                    </th>
+                    <th>Создать договор</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in ViewBag.CallData)
+                
+                {
+                    <tr>
+                        <td>
+                            @item.callDate
+                        </td>
+                        <td>
+                            @item.callNumber
+                        </td>
+                        <td>
+                            @item.ContractDate
+                        </td>
+                        <td>
+                            @item.docType
+                        </td>
+                        <td>
+                            @item.cName
+                        </td>
+                        <td>
+                            @item.repFName
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Создать договор", "CreateContract", new { id = item.callID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </section>
+    @section scripts{
+
+        <style>
+            td.details-control {
+                background: url('http://www.datatables.net/examples/resources/details_open.png') no-repeat center center;
+                cursor: pointer;
+            }
+
+            tr.shown td.details-control {
+                background: url('http://www.datatables.net/examples/resources/details_close.png') no-repeat center center;
+            }
+        </style>
+
+        <link href="~/Content/DataTables/datatables.min.css" rel="stylesheet" />
+        <link href="~/Content/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css" rel="stylesheet" />
+        <script src="~/Content/DataTables/datatables.min.js"></script>
+        <script src="~/Content/DataTables/datatables.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/dataTables.buttons.min.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.flash.min.js"></script>
+        <script src="~/Content/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+        <script src="~/Content/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.html5.min.js"></script>
+        <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.print.min.js"></script>
+        <script src="~/Content/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+
+                var table = $("#example").DataTable(
+                    {
+
+                        //responsive: {
+                        //    details: {
+                        //        type: 'column',
+                        //        target: 'tr'
+                        //    }
+                        //},
+                        //columnDefs: [{
+                        //    className: 'control',
+                        //    orderable: false,
+                        //    targets: 0
+                        //}],
+                        //order: [1, 'asc'],
+
+                        dom: 'Bfrtip',
+                        buttons: [
+                            { extend: 'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+                        ],
+
+                        "language":
+                            {
+                                "processing": "Подождите...",
+                                "search": "Поиск:",
+                                "lengthMenu": "Показать _MENU_ записей",
+                                "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                                "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                                "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                                "infoPostFix": "",
+                                "loadingRecords": "Загрузка записей...",
+                                "zeroRecords": "Записи отсутствуют.",
+                                "emptyTable": "В таблице отсутствуют данные",
+                                "paginate": {
+                                    "first": "Первая",
+                                    "previous": "Предыдущая",
+                                    "next": "Следующая",
+                                    "last": "Последняя"
+                                },
+                                "aria": {
+                                    "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                                    "sortDescending": ": активировать для сортировки столбца по убыванию"
+                                }
+                            }
+
+
+                    }
+                )
+
+
+                $('#example').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    } else {
+                        // Open this row
+                        row.child(format(tr.data('child-value'))).show();
+                        tr.addClass('shown');
+                    }
+                });
+
+
+            })
+
+            
+
+            function format() {
+                // `d` is the original data object for the row
+                return 
+                    '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                        '<tr>' +
+                            '<td>Наименование изделия:</td>' +
+                            '<td>' + item.itName + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<td>Количество объектов:</td>' +
+                            '<td>' + item.itQty + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<td>Extra info:</td>' +
+                            '<td>And any further details here (images etc)...</td>' +
+                        '</tr>' +
+                    '</table>'
+                    ;
+            }
+
+
+            //////////////////
+
+            //function format(value) {
+            //    return '<div>Hidden Value: ' + value + '</div>';
+            //}
+            
+
+
+
+
+
+
+        </script>
+    }
+</div>
+

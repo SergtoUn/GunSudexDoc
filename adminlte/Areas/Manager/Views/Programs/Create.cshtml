@@ -1,0 +1,88 @@
+﻿@model WeaponDoc.Models.Program
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="content-wrapper">
+
+
+    <section class="content-header">
+
+        <h1>
+            Ввести данные о программе
+            <small></small>
+        </h1>
+    </section>
+
+    <section class="content">
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="box">
+                <div class="box-header">
+                    <h4>Запись о программе испытаний</h4>
+                </div>
+                <div class="box-body">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.Label("Тип объекта", htmlAttributes: new { @class = "control-label col-md-2" })
+                        
+                            @Html.DropDownListFor(model => model.ItemTypeID, ViewBag.ItemTypeID as SelectList, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ItemTypeID, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Стандарт", htmlAttributes: new { @class = "control-label col-md-2" })
+                        
+                            @Html.EditorFor(model => model.Standard, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Standard, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Полное название программы", htmlAttributes: new { @class = "control-label col-md-2" })
+                        
+                            @Html.EditorFor(model => model.ProgramNameFull, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProgramNameFull, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Краткое название программы", htmlAttributes: new { @class = "control-label col-md-2" })
+                        
+                            @Html.EditorFor(model => model.ProgramNameShort, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProgramNameShort, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Продолжительность испытания, в часах", htmlAttributes: new { @class = "control-label col-md-2" })
+                        
+                            @Html.EditorFor(model => model.DurationPerUnit, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProgramNameShort, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                    <div class="form-group">
+                        @*<div class="col-md-offset-2 col-md-10">*@
+                            <input type="submit" value="Сохранить запись" class="btn btn-default" />
+                        @*</div>*@
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Вернуться к списку программ", "Index")
+        </div>
+    </section>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+</div>
