@@ -122,6 +122,7 @@ namespace WeaponDoc.Areas.Manager.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+            db.Dispose();
         }
     }
 }

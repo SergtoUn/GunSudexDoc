@@ -30,7 +30,7 @@
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        @Html.LabelFor(model => model.CurentDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.Label("Дата", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
                             @Html.TextBoxFor(model => model.CurentDate, DateTime.Today.ToString("{0:dd MMMM yyyy г.}"), new { @class = "col-md-4 datepicker", @style = "max-width:170px", @oninput = "this.className = ''", @placeholder = "Дата...", @id = "Datepicker", @title = "Дата начала действия" })
                             @Html.ValidationMessageFor(model => model.CurentDate, "", new { @class = "text-danger" })
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.HourFee, htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.Label("Ставка работы эксперта, руб./час", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.HourFee, new { htmlAttributes = new { @class = "form-control col-md-4", @style = "max-width:170px" } })
                             @Html.ValidationMessageFor(model => model.HourFee, "", new { @class = "text-danger" })
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.ConsumablesCost, htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.Label("Стоимость расходных материалов", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.ConsumablesCost, new { htmlAttributes = new { @class = "form-control col-md-4", @style = "max-width:170px" } })
                             @Html.ValidationMessageFor(model => model.ConsumablesCost, "", new { @class = "text-danger" })
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.EquipmentMaintanance, htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.Label("Стоимость обслуживания оборудования", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.EquipmentMaintanance, new { htmlAttributes = new { @class = "form-control col-md-4", @style = "max-width:170px" } })
                             @Html.ValidationMessageFor(model => model.EquipmentMaintanance, "", new { @class = "text-danger" })

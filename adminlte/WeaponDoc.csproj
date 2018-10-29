@@ -4576,6 +4576,7 @@
     <Content Include="Views\Shared\Page404.cshtml" />
     <Content Include="Views\Shared\_Layout404.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\__Date.cshtml" />
+    <Content Include="Views\Shared\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Manager\Files\Contracts\docx\" />
