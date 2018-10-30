@@ -303,7 +303,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.TaxID, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.TaxID, new { htmlAttributes = new { @class = "col-md-8", @type = "number", @min = "1", @maxlength = "9" } })
+                    @Html.TextBoxFor(model => model.TaxID, new { htmlAttributes = new { @class = "col-md-8", @type = "number", @min = "1", @maxlength = "9", @ id = "num" } })
                     @Html.ValidationMessageFor(model => model.TaxID, "", new { @class = "text-danger" })
 
                 </div>
@@ -324,7 +324,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.OKPO, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.OKPO, new { htmlAttributes = new { @class = "col-md-8" } })
+                    @Html.TextBoxFor(model => model.OKPO, new { htmlAttributes = new { @class = "col-md-8", @id = "num2", @type = "number"} })
                     @Html.ValidationMessageFor(model => model.OKPO, "", new { @class = "text-danger" })
 
                 </div>
@@ -667,6 +667,11 @@
                 }
                 return valid; // return the valid status
             }
+            function myFunction() {
+                var x, text;
+                x = document.getElementById("numb").value
+            }
+
 
             function fixStepIndicator(n) {
                 // This function removes the "active" class of all steps...

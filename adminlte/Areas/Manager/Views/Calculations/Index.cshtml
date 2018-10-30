@@ -5,42 +5,61 @@
     Layout = "~/Areas/Manager/Views/Shared/_LayoutManager.cshtml";
 }
 
-<h2>Index</h2>
+<div class="content-wrapper">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HourFee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ConsumablesCost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EquipmentMaintanance)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HourFee)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ConsumablesCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EquipmentMaintanance)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CurentDate }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CurentDate }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CurentDate })
-        </td>
-    </tr>
-}
+    <section class="content-header">
 
-</table>
+        <h1>
+            Данные для калькуляций
+            <small></small>
+        </h1>
+    </section>
+
+    <sections class="content">
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HourFee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ConsumablesCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EquipmentMaintanance)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.CurentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HourFee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsumablesCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EquipmentMaintanance)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Редактировать", "Edit", new { id = item.CurentDate }) |
+                        @Html.ActionLink("Детальная информация", "Details", new { id = item.CurentDate }) |
+                        @Html.ActionLink("Удалить запись", "Delete", new { id = item.CurentDate })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </sections>
