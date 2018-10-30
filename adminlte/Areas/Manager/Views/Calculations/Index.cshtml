@@ -19,24 +19,26 @@
     <sections class="content">
 
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Создать новую запись", "Create")
         </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CurentDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HourFee)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ConsumablesCost)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EquipmentMaintanance)
-                </th>
-                <th></th>
-            </tr>
+        <table class="table" id="CalcTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Дата")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Часовая ставка работы эксперта")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Расходные материалы")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Обслуживание оборудования")
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
 
             @foreach (var item in Model)
             {
@@ -62,4 +64,68 @@
             }
 
         </table>
-        </sections>
+    </sections>
+</div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link href="~/Content/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/Content/DataTables/datatables.min.js"></script>
+    <script src="~/Content/DataTables/datatables.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.flash.min.js"></script>
+    <script src="~/Content/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+    <script src="~/Content/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.html5.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.5.2/js/buttons.print.min.js"></script>
+    <script src="~/Scripts/RegexFilter.js"></script>
+    <script src="~/Scripts/AdvancedForms.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var t = $("#CalcTable").DataTable(
+                {
+                    paging: true,
+                    bFilter: false,
+                    ordering: false,
+                    searching: true,
+                    dom: 't',
+
+                    "language":
+                        {
+                            "processing": "Подождите...",
+                            "search": "Поиск:",
+                            "lengthMenu": "Показать _MENU_ записей",
+                            "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                            "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                            "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                            "infoPostFix": "",
+                            "loadingRecords": "Загрузка записей...",
+                            "zeroRecords": "Записи отсутствуют.",
+                            "emptyTable": "В таблице отсутствуют данные",
+                            "paginate": {
+                                "first": "Первая",
+                                "previous": "Предыдущая",
+                                "next": "Следующая",
+                                "last": "Последняя"
+                            },
+                            "aria": {
+                                "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                                "sortDescending": ": активировать для сортировки столбца по убыванию"
+                            }
+                        }
+
+                });
+
+
+
+
+
+        })
+
+    </script>
+}

@@ -294,6 +294,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GunSudexDbContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GunSudexDbContextOverride.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs">
       <DependentUpon>GunSudexDbContext.tt</DependentUpon>

@@ -303,8 +303,8 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.TaxID, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.TaxID, new { htmlAttributes = new { @class = "col-md-8", @type = "number", @min = "1", @maxlength = "9", @ id = "num" } })
-                    @Html.ValidationMessageFor(model => model.TaxID, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(model => model.TaxID, new { htmlAttributes = new { @class = "col-md-8", @type = "number", @min = "1", @maxlength = "9", @id = "num" } })
+                    @Html.ValidationMessageFor(model => model.TaxID, "До 9 цифр", new { @class = "text-danger" })
 
                 </div>
 
@@ -324,15 +324,15 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.OKPO, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.OKPO, new { htmlAttributes = new { @class = "col-md-8", @id = "num2", @type = "number"} })
-                    @Html.ValidationMessageFor(model => model.OKPO, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(model => model.OKPO, new { htmlAttributes = new { @class = "col-md-8", @id = "num", @type = "number"} })
+                    @Html.ValidationMessageFor(model => model.OKPO, "Числовое значение!!!", new { @class = "text-danger" })
 
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.CustomerBankAccount, htmlAttributes: new { @class = "control-label col-md-4" })
                     @Html.EditorFor(model => model.CustomerBankAccount, new { htmlAttributes = new { @class = "col-md-8", maxlength = "28" } })
-                    @Html.ValidationMessageFor(model => model.CustomerBankAccount, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.CustomerBankAccount, "До 28 знаков", new { @class = "text-danger" })
 
                 </div>
 
@@ -660,6 +660,15 @@
                         // and set the current valid status to false
                         valid = false;
                     }
+
+                    if ((y[i].id == 'num') && (typeof y[i].value != 'number')) {
+                        // add an "invalid" class to the field:
+                        y[i].className += " invalid";
+                        // and set the current valid status to false
+                        valid = false;
+                    }
+
+
                 }
                 // If the valid status is true, mark the step as finished and valid:
                 if (valid) {
@@ -667,10 +676,10 @@
                 }
                 return valid; // return the valid status
             }
-            function myFunction() {
-                var x, text;
-                x = document.getElementById("numb").value
-            }
+            //function myFunction() {
+            //    var x, text;
+            //    x = document.getElementById("numb").value
+            //}
 
 
             function fixStepIndicator(n) {
