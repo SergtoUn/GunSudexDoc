@@ -392,159 +392,199 @@ namespace WeaponDoc.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
 
+
+
+
+
+
+        /// <summary>
+        /// 
+        ///             CallViewModel CREATE HTTPPOST           //////////////////////////////////
+        /// 
+        /// </summary>
+        /// <param name="callViewModel"></param>
+        /// <returns></returns>
+        /// 
+
+
+
+
+
+
+
+
+
         [HttpPost]
         public ActionResult Create(CallViewModel callViewModel)
         {
-            Call call = new Call();
-            Customer customer = new Customer();
-            CalcDetail cd = new CalcDetail();
-            Item item = new Item();
-            CallDetail callDetail = new CallDetail();
-
-
-            Representative rep = new Representative
-            {
-                FamilyName = callViewModel.RepFamilyName,
-                FirstName = callViewModel.RepFirstName,
-                MidName = callViewModel.RepMidName,
-                Position = callViewModel.RepPosition,
-                PhoneNumber = callViewModel.RepPhoneNumber
-            };
-
-            TempData["msg"] = "<script>alert(@model.JudicialStatus);</script>";
-            ViewBag.Jstat = callViewModel.JudicialStatus;
-            callexp = (from e in db.Experts
-                       where (e.ExpertID == callViewModel.ExpID)
-                       select (e.Position.PositionDescr + e.FamilyName + e.FirstName + e.MidName)).FirstOrDefault();
-
-
-            customer.Name = callViewModel.CustomerName;
-
-
-            var js = Int32.Parse(callViewModel.JudicialStatus);
-
-
-            customer.JudicialStatusID = (from j in db.JudicialStatuses
-                                         where (j.JudicialStatus1 == js)
-                                         select (j.JudicialStatusID)).FirstOrDefault();
-
-            customer.Address = callViewModel.CustomerAddress;
-            customer.TaxID = callViewModel.TaxID;
-            customer.OKPO = callViewModel.OKPO;
-            customer.Account = callViewModel.CustomerBankAccount;
-            customer.BankBranch = callViewModel.BankBranch;
-            customer.BranchAddress = callViewModel.BranchAddress;
-            customer.BankCode = callViewModel.BankCode;
-            customer.BIC = callViewModel.BIC;
-            customer.PhoneNumber = callViewModel.CustomerPhoneNumber;
-            customer.MPhoneNumber = callViewModel.MPhoneNumber;
-
-            customer.Representative = rep;
-
-            callViewModel.CallID = Guid.NewGuid();
-            //callViewModel.ItemID = Guid.NewGuid();
-            call.CallID = callViewModel.CallID;
-            call.CallName = callViewModel.CallName;
-            call.CallDate = callViewModel.CallDate;
-            call.SampleActDate = callViewModel.SampleActDate;
-            call.DocNumber = callViewModel.Number;
-            call.ContractDate = DateTime.Today; //DateTime.Today.ToString("d MMMM yyyy г.", CultureInfo.GetCultureInfo("ru-ru"));
-            call.DocType = callViewModel.DocType;
-            call.AffidavitDate = callViewModel.AffidavitDate;
-            call.AffidavitNum = callViewModel.AffidavitNum;
-
-
-
-            List<decimal> testCosts = new List<decimal>();
-
-            //item.ItemID = callViewModel.ItemID;
-            //item.ItemName = callViewModel.ItemName;
-            //item.ItemProducer = callViewModel.ItemProducer;
-
-
-            foreach (var i in callViewModel.ItemsList)
-            {
-                //Debugger.Break();
-                var itID = (from prog in db.Programs
-                            where (prog.ProgramNameShort.Equals(i.ProgramNameShort))
-                            select (prog.ItemTypeID)).FirstOrDefault();
-
-
-
-                i.ItemID = Guid.NewGuid();
-                item.ItemID = i.ItemID;
-                item.ItemName = i.ItemName;
-                item.ItemProducer = i.ItemProducer;
-                callDetail.ItemQty = i.ItemQty;
-                item.Additional = i.Additional;
-                //item.Comments = i.Comments;
-                //item.ItemSubtype.ItemSubtype1 = i.ItemSubtype;
-                //item.
-                item.ItemSubtypeID = (from ist in db.ItemSubtypes
-                                      where (ist.ItemSubtypeID == i.ItemSubtype)
-                                      select (ist.ItemSubtypeID)).FirstOrDefault();
-                //Debugger.Break();
-                var progDuration = (from prog in db.Programs
-                                    where (prog.ProgramNameShort.Equals(i.ProgramNameShort))
-                                    select (prog.DurationPerUnit)).FirstOrDefault();
-
-                decimal itemsDuration;
-                //Проверка на остатки null в progDuration
-                if (progDuration.HasValue)
-                {
-                    itemsDuration = (decimal)(progDuration * i.ItemQty);
-                }
-                else
-                {
-                    progDuration = 1000;
-                    itemsDuration = (decimal)(progDuration * i.ItemQty);
-                }
-
-                //var lastDate = db.Calculations.Select(a => new { a.CurentDate }).ToList().Max(p => p);
-                var calcdata = db.Calculations.Select(a => new { a.CurentDate, a.ConsumablesCost, a.HourFee, a.EquipmentMaintanance }).OrderByDescending(t => t.CurentDate).First();
-
-                callDetail.ItemTestCost = calcdata.HourFee * (decimal)itemsDuration;
-
-                //Ввод каждой себестоимости проведения исследования вида объекта 
-                testCosts.Add(callDetail.ItemTestCost);
-                cd.CalcDate = Convert.ToDateTime(i.calcDate, new CultureInfo("RU-ru"));
-                cd.CalcNum = i.calcNum;
-
-            }
-
-            //Debugger.Break();
             if (ModelState.IsValid)
             {
                 try
                 {
+                    Call call = new Call();
+                    Customer customer = new Customer();
+            
+
+
+                    Representative rep = new Representative
+                    {
+                        RepresentativeID = new Guid(),
+                        FamilyName = callViewModel.RepFamilyName,
+                        FirstName = callViewModel.RepFirstName,
+                        MidName = callViewModel.RepMidName,
+                        Position = callViewModel.RepPosition,
+                        PhoneNumber = callViewModel.RepPhoneNumber
+                    };
+
+                    //TempData["msg"] = "<script>alert(@model.JudicialStatus);</script>";
+                    //ViewBag.Jstat = callViewModel.JudicialStatus;
+                    callexp = (from e in db.Experts
+                               where (e.ExpertID == callViewModel.ExpID)
+                               select (e.Position.PositionDescr + e.FamilyName + e.FirstName + e.MidName)).FirstOrDefault();
+
+                    customer.CustomerID = new Guid();
+                    call.CustomerID = customer.CustomerID;
+                    customer.Name = callViewModel.CustomerName;
+                    //customer.RepresentativeID = rep.RepresentativeID;
+
+
+                    var js = Int32.Parse(callViewModel.JudicialStatus);
+
+
+                    customer.JudicialStatusID = (from j in db.JudicialStatuses
+                                                 where (j.JudicialStatus1 == js)
+                                                 select (j.JudicialStatusID)).FirstOrDefault();
+
+                    customer.Address = callViewModel.CustomerAddress;
+                    customer.TaxID = callViewModel.TaxID;
+                    customer.OKPO = callViewModel.OKPO;
+                    customer.Account = callViewModel.CustomerBankAccount;
+                    customer.BankBranch = callViewModel.BankBranch;
+                    customer.BranchAddress = callViewModel.BranchAddress;
+                    customer.BankCode = callViewModel.BankCode;
+                    customer.BIC = callViewModel.BIC;
+                    customer.PhoneNumber = callViewModel.CustomerPhoneNumber;
+                    customer.MPhoneNumber = callViewModel.MPhoneNumber;
+
+                    customer.RepresentativeID = rep.RepresentativeID;
+
+                    callViewModel.CallID = Guid.NewGuid();
+                    //callViewModel.ItemID = Guid.NewGuid();
+                    call.CallID = callViewModel.CallID;
+                    call.CallName = callViewModel.CallName;
+                    call.CallDate = callViewModel.CallDate;
+                    call.SampleActDate = callViewModel.SampleActDate;
+                    call.DocNumber = callViewModel.Number;
+                    call.ContractDate = DateTime.Today; //DateTime.Today.ToString("d MMMM yyyy г.", CultureInfo.GetCultureInfo("ru-ru"));
+                    call.DocType = callViewModel.DocType;
+                    call.AffidavitDate = callViewModel.AffidavitDate;
+                    call.AffidavitNum = callViewModel.AffidavitNum;
+
+
+
+                    List<decimal> testCosts = new List<decimal>();
+
+                    //item.ItemID = callViewModel.ItemID;
+                    //item.ItemName = callViewModel.ItemName;
+                    //item.ItemProducer = callViewModel.ItemProducer;
+
+
+                    foreach (var i in callViewModel.ItemsList)
+                    {
+                        CallDetail callDetail = new CallDetail();
+                        CalcDetail cd = new CalcDetail();
+                        Item item = new Item();
+                        //Debugger.Break();
+                        var itID = (from prog in db.Programs
+                                    where (prog.ProgramNameShort.Equals(i.ProgramNameShort))
+                                    select (prog.ItemTypeID)).FirstOrDefault();
+
+                        callDetail.CallID = call.CallID;
+                        callDetail.ProgramID = (from prog in db.Programs
+                                                where (prog.ProgramNameShort.Equals(i.ProgramNameShort))
+                                                select prog.ProgramID).FirstOrDefault();
+
+                        i.ItemID = Guid.NewGuid();
+                        item.ItemID = callDetail.ItemID = i.ItemID;
+                        item.ItemName = i.ItemName;
+                        item.ItemProducer = i.ItemProducer;
+                        callDetail.ItemQty = i.ItemQty;
+                        item.Additional = i.Additional;
+                        cd.CalcID = item.CalcDetailsID = new Guid();
+
+
+                        //////////////////////////////////////// IMAGE PATH //////////////////////////////////////////
+
+
+                        item.ImagePath = "";
                 
-                    db.Representatives.Add(rep);
-                    db.Items.Add(item);
-                    db.Calls.Add(call);
-                    db.CalcDetails.Add(cd);
-                    db.CallDetails.Add(callDetail);
+                        item.ItemSubtypeID = (from ist in db.ItemSubtypes
+                                              where (ist.ItemSubtypeID == i.ItemSubtype)
+                                              select (ist.ItemSubtypeID)).FirstOrDefault();
+                        //Debugger.Break();
+                        var progDuration = (from prog in db.Programs
+                                            where (prog.ProgramNameShort.Equals(i.ProgramNameShort))
+                                            select (prog.DurationPerUnit)).FirstOrDefault();
 
-                    //db.CallViewModels.Add(callViewModel);
-                    db.SaveChanges();
+                        decimal itemsDuration;
+                
+                        if (!progDuration.HasValue)
+                        {
+                            progDuration = 1000;
+                        }
+                
+                        itemsDuration = (decimal)(progDuration * i.ItemQty);
 
+                        //var lastDate = db.Calculations.Select(a => new { a.CurentDate }).ToList().Max(p => p);
+                        var calcdata = db.Calculations.Select(a => new { a.CurentDate, a.ConsumablesCost, a.HourFee, a.EquipmentMaintanance }).OrderByDescending(t => t.CurentDate).First();
+
+                        callDetail.ItemTestCost = calcdata.HourFee * (decimal)itemsDuration;
+
+                        //Ввод каждой себестоимости проведения исследования вида объекта
+                
+                        testCosts.Add(callDetail.ItemTestCost);
+                        cd.CalcDate = Convert.ToDateTime(i.calcDate, new CultureInfo("RU-ru"));
+                        cd.CalcNum = i.calcNum;
+
+                        db.Items.Add(item);
+                        db.CalcDetails.Add(cd);
+                        db.CallDetails.Add(callDetail);
+
+                    }
+
+                    Debugger.Break();
+            
+
+                            db.Representatives.Add(rep);
+                            db.Customers.Add(customer);
                     
+                            db.Calls.Add(call);
+                            //db.CallViewModels.Add(callViewModel);
+                            db.SaveChanges();
+
+
                 }
 
                 catch (DbEntityValidationException e)
                 {
                     foreach (var eve in e.EntityValidationErrors)
                     {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
                             eve.Entry.Entity.GetType().Name, eve.Entry.State);
                         foreach (var ve in eve.ValidationErrors)
                         {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
                                 ve.PropertyName, ve.ErrorMessage);
                         }
                     }
                 }
 
-                ViewBag.Message = "Ошибка ввода данных!";
+                catch (NullReferenceException ne)
+                {
+                    Debug.WriteLine(ne);
+                }
+
+                
                 return RedirectToAction("Index");
                 
             }

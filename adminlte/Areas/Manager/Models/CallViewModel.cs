@@ -41,8 +41,7 @@ namespace WeaponDoc.Areas.Manager.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MM yyyy} г.")]
         public System.DateTime ContractDate { get; set; }
 
-        [Required, Display(Name = "Тип документа")]
-        public string DocType { get; set; }
+        
 
         [Required, Display(Name = "Рентабельность, %")]
         public decimal CostEfficiency { get; set; }
@@ -60,11 +59,14 @@ namespace WeaponDoc.Areas.Manager.Models
         [Required, Display(Name = "Отчество")]
         public string RepMidName { get; set; }
 
+        [Required, Display(Name = "Тип документа")]
+        public string DocType { get; set; }
+
         [Required, Display(Name = "Должность")]
         public string RepPosition { get; set; }
 
         [Required, Display(Name = "Телефон (###) ###-##-##")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:(###) ###-##-##}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:(###) ###-##-##}")]
         public string RepPhoneNumber { get; set; }
 
         //Customer
@@ -84,7 +86,7 @@ namespace WeaponDoc.Areas.Manager.Models
         public string BIC { get; set; }
 
         [Required, Display(Name = "Телефон (###) ###-##-##")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:(###) ###-##-##}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:(###) ###-##-##}")]
         public string CustomerPhoneNumber { get; set; }
 
         [Required, Display(Name = "ОКПО")]

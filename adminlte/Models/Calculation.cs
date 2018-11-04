@@ -12,7 +12,7 @@ namespace WeaponDoc.Models
     using System;
     using System.Collections.Generic;
     
-    public class Calculation
+    public partial class Calculation
     {
         public System.DateTime CurentDate { get; set; }
         public decimal HourFee { get; set; }

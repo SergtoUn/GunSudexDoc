@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Projects\С_работы_22_10_2018\19_10_2018\02_10_2018\AdminLTE-ASP-NET-MVC-master\adminlte\Models\GunSudexDbContext.edmx'. 
+﻿// T4 code generation is enabled for model 'h:\GitHubRepository\AdminLTE-ASP-NET-MVC-master\adminlte\Models\GunSudexDbContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

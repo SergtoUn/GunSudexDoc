@@ -7,8 +7,8 @@ using System.Data.Entity.Validation;
 
 namespace WeaponDoc.Models
 {
-    public partial class GunSudexDbContext 
-    
+    public partial class GunSudexDbContext
+
     {
         public override int SaveChanges()
         {
